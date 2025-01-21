@@ -1,0 +1,91 @@
+{% extends "admin_dashboard_base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4">Verify Students and Instructors</h2>
+
+    <!-- Unverified Students -->
+    <div class="card mb-4 shadow">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Unverified Students</h5>
+        </div>
+        <div class="card-body">
+            {% if unverified_students %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-primary">
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col" class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for student in unverified_students %}
+                                <tr>
+                                    <td>{{ student.name }}</td>
+                                    <td>{{ student.email }}</td>
+                                    <td class="text-center">
+                                        <form method="POST" action="/admin_verify" class="d-inline">
+                                            <input type="hidden" name="email" value="{{ student.email }}">
+                                            <input type="hidden" name="user_type" value="student">
+                                            <button type="submit" name="action" value="approve" class="btn btn-success btn-sm me-2">Approve</button>
+                                            <button type="submit" name="action" value="reject" class="btn btn-danger btn-sm">Reject</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-muted text-center">No unverified students at the moment.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Unverified Instructors -->
+    <div class="card mb-4 shadow">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Unverified Instructors</h5>
+        </div>
+        <div class="card-body">
+            {% if unverified_instructors %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-success">
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Department</th>
+                                <th scope="col">Designation</th>
+                                <th scope="col" class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for instructor in unverified_instructors %}
+                                <tr>
+                                    <td>{{ instructor.name }}</td>
+                                    <td>{{ instructor.email }}</td>
+                                    <td>{{ instructor.department }}</td>
+                                    <td>{{ instructor.designation }}</td>
+                                    <td class="text-center">
+                                        <form method="POST" action="/admin_verify" class="d-inline">
+                                            <input type="hidden" name="email" value="{{ instructor.email }}">
+                                            <input type="hidden" name="user_type" value="instructor">
+                                            <button type="submit" name="action" value="approve" class="btn btn-success btn-sm me-2">Approve</button>
+                                            <button type="submit" name="action" value="reject" class="btn btn-danger btn-sm">Reject</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-muted text-center">No unverified instructors at the moment.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

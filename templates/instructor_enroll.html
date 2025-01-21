@@ -1,0 +1,43 @@
+{% extends "instructor_dashboard_base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Pending Enrollments</h2>
+
+    <!-- Pending Enrollments Table -->
+    {% if pending_enrollments %}
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col">Student Name</th>
+                        <th scope="col">Student Email</th>
+                        <th scope="col">Course Name</th>
+                        <th scope="col">Course ID</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for enrollment in pending_enrollments %}
+                        <tr>
+                            <td>{{ enrollment.student.name }}</td>
+                            <td>{{ enrollment.student_email }}</td>
+                            <td>{{ enrollment.course.course_name }}</td>
+                            <td>{{ enrollment.course.course_id }}</td>
+                            <td>
+                                <form method="POST" action="/instructor_enroll" class="d-inline">
+                                    <input type="hidden" name="enrollment_id" value="{{ enrollment.id }}">
+                                    <button type="submit" name="action" value="approve" class="btn btn-success btn-sm me-2">Approve</button>
+                                    <button type="submit" name="action" value="reject" class="btn btn-danger btn-sm">Reject</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-muted text-center">No pending enrollments at the moment.</p>
+    {% endif %}
+</div>
+{% endblock %}

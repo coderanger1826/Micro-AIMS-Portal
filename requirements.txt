@@ -1,0 +1,6 @@
+Flask
+flask-session 
+flask-mail
+flask_sqlalchemy
+bcrypt
+gunicorn

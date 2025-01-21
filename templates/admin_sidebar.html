@@ -1,0 +1,60 @@
+<style>
+    /* Sidebar-specific styles */
+    .sidebar {
+        width: 260px;
+        background-color: #4c4a1f; /* Deep olive yellow */
+        color: #fdfdfd; /* Soft white */
+        position: fixed;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 20px;
+        box-shadow: 4px 0 8px rgba(0, 0, 0, 0.2);
+        font-family: 'Arial', sans-serif;
+    }
+    
+    .sidebar h3 {
+        font-size: 1.6rem;
+        font-weight: bold;
+        margin-bottom: 30px;
+        color: #ffc107; /* Bright yellow for highlights */
+        text-transform: uppercase;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+    
+    .sidebar a {
+        text-decoration: none;
+        font-size: 1.1rem;
+        color: #fdfdfd;
+        margin: 12px 0;
+        padding: 12px 20px;
+        width: 100%;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+    }
+    
+    .sidebar a:hover {
+        background-color: #ffc107; /* Bright yellow hover effect */
+        color: #4c4a1f; /* Olive yellow text on hover */
+        transform: scale(1.05);
+    }
+    
+    .sidebar a:active {
+        background-color: #e0a800; /* Slightly darker yellow on click */
+        color: #ffffff;
+    }
+</style>
+
+<div class="sidebar">
+    <h3>Admin Dashboard</h3>
+    <a href="/admin_home">Home</a>
+    <a href="/admin_verify">Verify Users</a>
+    <a href="/admin_delete">Delete Users</a>
+    <a href="/admin_profile">Edit Profile</a>
+    <a href="/admin_logout">Logout</a>
+</div>

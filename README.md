@@ -1,1 +1,1 @@
-# Micro-AIMS-Portal
+# Faculty-Appraisal-System

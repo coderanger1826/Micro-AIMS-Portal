@@ -1,0 +1,54 @@
+<style>
+    .sidebar {
+        width: 260px;
+        background-color: #2e4c3d; /* Deep forest green */
+        color: #ecf0f1; /* Soft white */
+        position: fixed;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 20px;
+        box-shadow: 4px 0 8px rgba(0, 0, 0, 0.2);
+        font-family: 'Arial', sans-serif;
+    }
+    .sidebar h3 {
+        font-size: 1.6rem;
+        font-weight: bold;
+        margin-bottom: 30px;
+        color: #28a745; /* Vibrant green for accents */
+        text-transform: uppercase;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+    .sidebar a {
+        text-decoration: none;
+        font-size: 1.1rem;
+        color: #ecf0f1;
+        margin: 12px 0;
+        padding: 12px 20px;
+        width: 100%;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+    }
+    .sidebar a:hover {
+        background-color: #28a745; /* Bright green hover effect */
+        color: #2e4c3d; /* Darker green for text */
+        transform: scale(1.05);
+    }
+    .sidebar a:active {
+        background-color: #218838; /* Slightly darker green on click */
+        color: #ffffff;
+    }
+</style>
+<div class="sidebar">
+    <h3>Instructor Dashboard</h3>
+    <a href="/instructor_home">Home</a>
+    <a href="/instructor_float">Float Courses</a>
+    <a href="/instructor_enroll">Manage Enrollments</a>
+    <a href="/instructor_profile">Edit Profile</a>
+    <a href="/instructor_logout">Logout</a>
+</div>

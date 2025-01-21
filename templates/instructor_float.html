@@ -1,0 +1,36 @@
+{% extends "instructor_dashboard_base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4">Float a New Course</h2>
+
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <form method="POST" action="/instructor_float">
+                <!-- Course ID -->
+                <div class="mb-3">
+                    <label for="course_id" class="form-label">Course ID <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="course_id" name="course_id" placeholder="Enter the course id" required>
+                </div>
+
+                <!-- Course Name -->
+                <div class="mb-3">
+                    <label for="course_name" class="form-label">Course Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="course_name" name="course_name" placeholder="Enter the course name" required>
+                </div>
+
+                <!-- Course Description -->
+                <div class="mb-3">
+                    <label for="course_description" class="form-label">Course Description <span class="text-danger">*</span></label>
+                    <textarea class="form-control" id="course_description" name="course_description" rows="4" placeholder="Write a brief description of the course" required></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Float Course</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
