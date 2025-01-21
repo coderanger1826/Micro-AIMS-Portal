@@ -1,26 +1,32 @@
 <style>
     .sidebar {
         width: 260px;
-        background-color: #2e4c3d; /* Deep forest green */
+        background-color: #356e57; /* Brighter forest green for sidebar */
         color: #ecf0f1; /* Soft white */
         position: fixed;
         height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 30px 20px;
+        padding: 0; /* Remove extra padding */
         box-shadow: 4px 0 8px rgba(0, 0, 0, 0.2);
         font-family: 'Arial', sans-serif;
     }
+
     .sidebar h3 {
         font-size: 1.6rem;
         font-weight: bold;
-        margin-bottom: 30px;
-        color: #28a745; /* Vibrant green for accents */
+        margin: 0; /* Remove margin to fit the top box */
+        background-color: #1e4a38; /* Darker green for top section */
+        color: #ffffff; /* White text inside the top section */
+        padding: 20px 0; /* Adjust padding for vertical spacing */
         text-transform: uppercase;
         text-align: center;
         letter-spacing: 1px;
+        width: 100%; /* Ensures full width */
+        box-sizing: border-box; /* Include padding in width */
     }
+
     .sidebar a {
         text-decoration: none;
         font-size: 1.1rem;
@@ -31,24 +37,44 @@
         border-radius: 8px;
         transition: background-color 0.3s ease, transform 0.2s ease;
         display: flex;
-        align-items: center;
+        align-items: center; /* Align icon and text vertically */
+        gap: 10px; /* Space between icon and text */
         box-sizing: border-box;
     }
+
     .sidebar a:hover {
-        background-color: #28a745; /* Bright green hover effect */
-        color: #2e4c3d; /* Darker green for text */
-        transform: scale(1.05);
+        background-color: #28a745; /* Vibrant green hover effect */
+        color: #1e4a38; /* Darker green for text */
+        transform: scale(0.95); /* Subtle shrinking effect */
     }
+
     .sidebar a:active {
         background-color: #218838; /* Slightly darker green on click */
         color: #ffffff;
     }
+
+    .sidebar a img {
+        width: 20px; /* Set the width of the image */
+        height: 20px; /* Set the height of the image */
+        object-fit: contain; /* Ensures the image scales proportionally */
+    }
 </style>
+
 <div class="sidebar">
     <h3>Instructor Dashboard</h3>
-    <a href="/instructor_home">Home</a>
-    <a href="/instructor_float">Float Courses</a>
-    <a href="/instructor_enroll">Manage Enrollments</a>
-    <a href="/instructor_profile">Edit Profile</a>
-    <a href="/instructor_logout">Logout</a>
+    <a href="/instructor_home">
+        <img src="static/home_icon.png" alt="Home Icon">Home
+    </a>
+    <a href="/instructor_float">
+        <img src="static/course_icon.png" alt="Course Icon">Float Courses
+    </a>
+    <a href="/instructor_enroll">
+        <img src="static/enroll_icon.png" alt="Enroll Icon">Update Enrollments
+    </a>
+    <a href="/instructor_profile">
+        <img src="static/profile_icon.png" alt="Profile Icon">Manage Profile
+    </a>
+    <a href="/instructor_logout">
+        <img src="static/logout_icon.png" alt="Logout Icon">Logout
+    </a>
 </div>

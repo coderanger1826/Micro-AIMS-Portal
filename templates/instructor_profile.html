@@ -1,0 +1,59 @@
+{% extends "instructor_dashboard_base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Instructor Profile</h1>
+    <div class="row mt-4">
+        <!-- Profile Section -->
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title">Update Profile</h4>
+                    <form method="POST" action="/instructor_profile">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ instructor.name }}" placeholder="Enter new name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="department" class="form-label">Department</label>
+                            <input type="text" class="form-control" id="department" name="department" value="{{ instructor.department }}" placeholder="Enter new department">
+                        </div>
+                        <div class="mb-3">
+                            <label for="designation" class="form-label">Designation</label>
+                            <input type="text" class="form-control" id="designation" name="designation" value="{{ instructor.designation }}" placeholder="Enter new designation">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter new password">
+                        </div>
+                        <button type="submit" name="update_profile" class="btn btn-primary">Update Profile</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Courses Section -->
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title">Courses You Teach</h4>
+                    {% if instructor.courses %}
+                        <ul class="list-group">
+                            {% for course in instructor.courses %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>
+                                        <strong>{{ course.course_id }}</strong> : {{ course.course_name }}
+                                    </span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted">You are not teaching any courses currently.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

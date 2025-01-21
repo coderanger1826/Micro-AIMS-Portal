@@ -260,6 +260,43 @@ def student_course():
 
     return render_template('student_course.html', courses=courses, search_query=search_query)
 
+@app.route('/student_profile', methods=['GET', 'POST'])
+@login_required(role="student")
+def student_profile():
+    student_email = session.get('student_email')  # Ensure the student is logged in
+    student = Student.query.filter_by(email=student_email).first()
+
+    if request.method == 'POST':
+        # Handle profile update
+        if 'update_profile' in request.form:
+            new_name = request.form.get('name')
+            new_password = request.form.get('password')
+
+            if new_name:
+                student.name = new_name
+            if new_password:
+                student.password = new_password
+
+            db.session.commit()
+            flash('Profile updated successfully!', 'success')
+
+        # Handle course drop
+        elif 'drop_course' in request.form:
+            course_id = request.form.get('course_id')
+            enrollment = Enrollment.query.filter_by(course_id=course_id, student_email=student_email, status=True).first()
+            
+            if enrollment:
+                course = Course.query.filter_by(course_id=course_id).first()
+                course.current_enrollments -= 1
+                db.session.delete(enrollment)
+                db.session.commit()
+                flash(f'Dropped course: {course.course_name}', 'info')
+
+    # Get enrolled courses
+    enrolled_courses = Enrollment.query.filter_by(student_email=student_email, status=True).all()
+
+    return render_template('student_profile.html', student=student, enrolled_courses=enrolled_courses)
+
 @app.route('/student_logout')
 def student_logout():
     session.pop('student_email', None)
@@ -484,6 +521,38 @@ def instructor_enroll():
 
     return render_template('instructor_enroll.html', pending_enrollments=pending_enrollments)
 
+@app.route('/instructor_profile', methods=['GET', 'POST'])
+@login_required(role="instructor")
+def instructor_profile():
+    # Fetch the current instructor details
+    instructor_email = session.get('instructor_email')
+    instructor = Instructor.query.filter_by(email=instructor_email).first()
+
+    if request.method == 'POST':
+        # Update profile attributes
+        if 'update_profile' in request.form:
+            new_name = request.form.get('name', '').strip()
+            new_department = request.form.get('department', '').strip()
+            new_designation = request.form.get('designation', '').strip()
+            new_password = request.form.get('password', '').strip()
+
+            if new_name:
+                instructor.name = new_name
+            if new_department:
+                instructor.department = new_department
+            if new_designation:
+                instructor.designation = new_designation
+            if new_password:
+                instructor.password = new_password
+
+            db.session.commit()
+            flash('Profile updated successfully!', 'success')
+
+        return redirect('/instructor_profile')
+
+    # Render the profile page
+    return render_template('instructor_profile.html', instructor=instructor)
+
 @app.route('/instructor_logout')
 def instructor_logout():
     session.pop('instructor_email', None)
@@ -602,6 +671,32 @@ def admin_verify():
     unverified_instructors = Instructor.query.filter_by(verified=False).all()
 
     return render_template('admin_verify.html', unverified_students=unverified_students, unverified_instructors=unverified_instructors)
+
+@app.route('/admin_profile', methods=['GET', 'POST'])
+@login_required(role="admin")
+def admin_profile():
+    # Fetch the current admin details
+    admin_email = session.get('admin_email')
+    admin = Admin.query.filter_by(email=admin_email).first()
+
+    if request.method == 'POST':
+        # Update profile attributes
+        if 'update_profile' in request.form:
+            new_name = request.form.get('name', '').strip()
+            new_password = request.form.get('password', '').strip()
+
+            if new_name:
+                admin.name = new_name
+            if new_password:
+                admin.password = new_password
+
+            db.session.commit()
+            flash('Profile updated successfully!', 'success')
+
+        return redirect('/admin_profile')
+
+    # Render the profile page
+    return render_template('admin_profile.html', admin=admin)
 
 @app.route('/admin_logout')
 def admin_logout():

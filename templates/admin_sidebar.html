@@ -1,29 +1,32 @@
 <style>
-    /* Sidebar-specific styles */
     .sidebar {
         width: 260px;
-        background-color: #4c4a1f; /* Deep olive yellow */
+        background-color: #6a5c2a; /* Brighter olive yellow for sidebar */
         color: #fdfdfd; /* Soft white */
         position: fixed;
         height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 30px 20px;
+        padding: 0; /* Removed extra padding */
         box-shadow: 4px 0 8px rgba(0, 0, 0, 0.2);
         font-family: 'Arial', sans-serif;
     }
-    
+
     .sidebar h3 {
         font-size: 1.6rem;
         font-weight: bold;
-        margin-bottom: 30px;
-        color: #ffc107; /* Bright yellow for highlights */
+        margin: 0; /* Removed margin for better fit */
+        background-color: #4c3d15; /* Darker olive yellow for top section */
+        color: #ffffff; /* White text */
+        padding: 20px 0; /* Adjusted vertical spacing */
         text-transform: uppercase;
         text-align: center;
         letter-spacing: 1px;
+        width: 100%; /* Full width for top section */
+        box-sizing: border-box; /* Includes padding in width */
     }
-    
+
     .sidebar a {
         text-decoration: none;
         font-size: 1.1rem;
@@ -34,27 +37,41 @@
         border-radius: 8px;
         transition: background-color 0.3s ease, transform 0.2s ease;
         display: flex;
-        align-items: center;
+        align-items: center; /* Align icon and text */
+        gap: 10px; /* Spacing between icon and text */
         box-sizing: border-box;
     }
-    
+
     .sidebar a:hover {
         background-color: #ffc107; /* Bright yellow hover effect */
-        color: #4c4a1f; /* Olive yellow text on hover */
-        transform: scale(1.05);
+        color: #4c3d15; /* Darker olive yellow text on hover */
+        transform: scale(0.95); /* Subtle shrinking effect */
     }
-    
+
     .sidebar a:active {
         background-color: #e0a800; /* Slightly darker yellow on click */
         color: #ffffff;
+    }
+
+    .sidebar a img {
+        width: 20px; /* Fixed width */
+        height: 20px; /* Fixed height */
+        object-fit: contain; /* Ensures proportional scaling */
     }
 </style>
 
 <div class="sidebar">
     <h3>Admin Dashboard</h3>
-    <a href="/admin_home">Home</a>
-    <a href="/admin_verify">Verify Users</a>
-    <a href="/admin_delete">Delete Users</a>
-    <a href="/admin_profile">Edit Profile</a>
-    <a href="/admin_logout">Logout</a>
+    <a href="/admin_home">
+        <img src="static/home_icon.png" alt="Home Icon">Home
+    </a>
+    <a href="/admin_verify">
+        <img src="static/verify_icon.png" alt="Verify Icon">Verify Users
+    </a>
+    <a href="/admin_profile">
+        <img src="static/profile_icon.png" alt="Profile Icon">Edit Profile
+    </a>
+    <a href="/admin_logout">
+        <img src="static/logout_icon.png" alt="Logout Icon">Logout
+    </a>
 </div>
