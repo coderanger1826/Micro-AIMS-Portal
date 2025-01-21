@@ -4,105 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #89914081;
-        }
-
-        main {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .login-container {
-            background-color: white;
-            padding: 2rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .login-header h2 {
-            color: #ffc107;
-        }
-
-        .btn-primary {
-            background-color: #ffc107;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #e0a800;
-        }
-
-        .btn-secondary {
-            background-color: #6c757d;
-            border: none;
-        }
-
-        .btn-secondary:hover {
-            background-color: #5a6268;
-        }
-
-        .footer {
-            background-color: #f8f9fa;
-            padding: 20px;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
     {% include 'header.html' %}
     {% include 'flash_messages.html' %}
-    <!-- Main Content -->
-    <main>
-        <div class="login-container">
-            <div class="login-header">
-                <h2>Admin Login</h2>
-                <p>Enter your credentials to access the admin dashboard.</p>
-            </div>
-            <form method="POST" action="/admin_login">
-                {% if otp_sent %}
-                <!-- OTP Input -->
-                <div class="mb-3">
-                    <label for="otp" class="form-label">Enter OTP</label>
-                    <input type="text" class="form-control" id="otp" name="otp" placeholder="Enter the OTP sent to your email" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Verify OTP</button>
-                <a href="/admin_login_cancel" class="btn btn-secondary w-100 mt-2">Return to Login</a>
-                {% else %}
-                <!-- Email and Password Input -->
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Login</button>
-                {% endif %}
-            </form>
-        </div>
-    </main>
 
-    <!-- Bootstrap JS -->
+    <section class="ezy__signin10 light d-flex">
+        <div class="container">
+            <div class="row justify-content-between h-100">
+                <!-- Background Section -->
+                <div class="col-md-4 col-lg-6">
+                    <div
+                        class="ezy__signin10-bg-holder d-none d-md-block h-100"
+                        style="background-image: url('{{ url_for('static', filename='login.jpg') }}');">
+                    </div>
+                </div>
+
+                <!-- Login Form -->
+                <div class="col-md-8 col-lg-5 py-4">
+                    <div class="row align-items-center h-100 px-xl-4">
+                        <div class="col-12">
+                            <div class="card ezy__signin10-form-card">
+                                <div class="card-body p-md-4">
+                                    <h2 class="ezy__signin10-heading mb-3">Admin Login</h2>
+                                    <p class="mb-4">
+                                        {% if otp_sent %}
+                                            Verify your email with the OTP sent to your email address.
+                                        {% else %}
+                                            Enter your credentials to access the admin dashboard.
+                                        {% endif %}
+                                    </p>
+
+                                    <form method="POST" action="/admin_login">
+                                        {% if otp_sent %}
+                                            <!-- OTP Input -->
+                                            <div class="form-group mb-4 mt-2">
+                                                <input type="text" class="form-control" id="otp" name="otp" placeholder="Enter OTP" required>
+                                            </div>
+                                            <button type="submit" class="btn ezy__signin10-btn-submit w-100">Verify OTP</button>
+                                            <a href="/admin_login_cancel" class="btn btn-secondary w-100 mt-2">Return to Login</a>
+                                        {% else %}
+                                            <!-- Email Input -->
+                                            <div class="form-group mb-4 mt-2">
+                                                <input type="email" name="email" class="form-control" id="email" 
+                                                    placeholder="Enter your email" required>
+                                            </div>
+                                            <!-- Password Input -->
+                                            <div class="form-group mb-4 mt-2">
+                                                <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password" required>
+                                            </div>
+                                            <!-- Submit Button -->
+                                            <button type="submit" class="btn ezy__signin10-btn-submit w-100">Login</button>
+                                        {% endif %}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+<style>
+.ezy__signin10 {
+    background-color: rgb(255, 255, 255);
+    padding: 40px 0;
+    overflow: hidden;
+}
+
+.ezy__signin10 .container {
+    min-height: 90vh; /* Slightly smaller vertical height */
+}
+
+.ezy__signin10-heading {
+    font-weight: bold;
+    font-size: 22px; /* Reduced font size */
+    line-height: 25px;
+    color: #ffc107; /* Yellow Theme for Admin */
+}
+
+.ezy__signin10-bg-holder {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 150px;
+    width: 100%;
+    border-radius: 30px;
+}
+
+@media (min-width: 768px) {
+    .ezy__signin10-bg-holder {
+        width: 200%;
+    }
+}
+
+@media (min-width: 992px) {
+    .ezy__signin10-bg-holder {
+        width: 150%;
+    }
+}
+
+.ezy__signin10-form-card {
+    background-color: #ffffff;
+    border: none;
+    box-shadow: 0px 6px 118px rgba(0, 0, 0, 0.08);
+    border-radius: 15px;
+}
+
+.ezy__signin10 .form-control {
+    min-height: 42px; /* Reduced form input size */
+    line-height: 36px;
+    border-color: transparent;
+    background: rgba(255, 193, 7, 0.14); /* Subtle Yellow Background */
+    border-radius: 8px;
+    color: #ffc107;
+}
+
+.ezy__signin10 .form-control:focus {
+    border-color: #e0a800;
+    box-shadow: none;
+}
+
+.ezy__signin10-btn-submit {
+    padding: 10px 28px; /* Slightly smaller button */
+    background-color: #ffc107;
+    color: #ffffff;
+}
+
+.ezy__signin10-btn-submit:hover {
+    color: #ffffff;
+    background-color: #e0a800;
+}
+</style>
