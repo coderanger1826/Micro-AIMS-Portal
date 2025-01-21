@@ -14,8 +14,8 @@ app.secret_key = 'secret_key'
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'johnDoe18262117@gmail.com'  # Replace with your email
-app.config['MAIL_PASSWORD'] = 'avsj hgzp mxfc yxxz'  # Replace with your app password
+app.config['MAIL_USERNAME'] = 'johnDoe18262117@gmail.com'  
+app.config['MAIL_PASSWORD'] = 'avsj hgzp mxfc yxxz'  
 mail = Mail(app)
 
 class Student(db.Model):
