@@ -425,11 +425,12 @@ def instructor_enroll():
             return redirect('/instructor_enroll')
 
         student_email = enrollment.student_email
-        student_name = enrollment.student.name  # Fetch student's name before deleting
+        student_name = enrollment.student.name  # Fetch student's name before any changes
         course = enrollment.course
 
         if action == 'approve':
             enrollment.status = True
+            course.current_enrollments += 1  # Increment current enrollments in the course
             db.session.commit()
 
             # Send approval email
@@ -447,7 +448,6 @@ def instructor_enroll():
 
             flash(f"Enrollment for '{course.course_name}' approved.", "success")
         elif action == 'reject':
-            # Fetch student name and email before deleting the enrollment record
             db.session.delete(enrollment)
             db.session.commit()
 
