@@ -103,7 +103,7 @@ def login_required(role=None):
     return decorator
 
 @app.route("/")
-def home():
+def home(): 
     return render_template('home.html')
 
 @app.route("/about")
@@ -292,10 +292,16 @@ def student_profile():
                 db.session.commit()
                 flash(f'Dropped course: {course.course_name}', 'info')
 
-    # Get enrolled courses
-    enrolled_courses = Enrollment.query.filter_by(student_email=student_email, status=True).all()
+    # Fetch both approved and pending enrollments
+    approved_courses = Enrollment.query.filter_by(student_email=student_email, status=True).all()
+    pending_courses = Enrollment.query.filter_by(student_email=student_email, status=False).all()
 
-    return render_template('student_profile.html', student=student, enrolled_courses=enrolled_courses)
+    return render_template(
+        'student_profile.html',
+        student=student,
+        approved_courses=approved_courses,
+        pending_courses=pending_courses
+    )
 
 @app.route('/student_logout')
 def student_logout():
